@@ -1,0 +1,162 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Winners</title>
+    <!-- Bootstrap Core CSS -->
+    @*<link href="../css/bootstrap.min.css" rel="stylesheet">*@
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    @*<link href="../css/one-page-wonder.css" rel="stylesheet">
+        <link href="../css/custom.css" rel="stylesheet">*@
+    <link href="~/css/one-page-wonder.css" rel="stylesheet" />
+    <link href="~/css/custom.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    @*<script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>*@
+    <script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
+    @*<script src="~/Scripts/jquery.signalR-1.0.0-rc1.min.js"></script>*@
+    <script src="~/signalr/hubs" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        $(function () {
+
+            // Proxy created on the fly
+            var job = $.connection.finalVotingHub;
+
+            // Declare a function on the job hub so the server can invoke it
+            job.client.displayStatus = function () {
+                getData();
+                getDataMBand();
+            };
+
+            // Start the connection
+            $.connection.hub.start();
+            getData();
+            getDataMBand();
+        });
+
+        function getData3()
+        {
+            //alert(1);
+            $('#Main').empty().load('About');
+        }
+
+
+        function getData() {
+            var $tbl = $('#BandE');
+            $.ajax({
+                url: '/winners?band=E',
+                type: 'POST',
+                datatype: 'json',
+                success: function (data) {
+                    if (data.length > 0) {
+                        $tbl.empty();
+                        //$tbl.append(' <tr><th>Total Votes</th><th>user ID</th><th>band</th></tr>');
+                        $tbl.append(' <li> <p class="pull-right num-of-vot">No. of Votes</p></li>');
+
+                        var rows = [];
+                        for (var i = 0,j=1; i < (data.length); i++,j++) {
+                            //rows.push(' <tr><td>' + data[i].TotalVotes + '</td><td>' + data[i].UserId + '</td><td>' + data[i].Name + '</td></tr>');
+                            //<li> <img class="candi-img" src="~/images/Candidate_img.png"><span class="candidate-name">Candidate 1 </span>  <span class="pull-right votes"> 121</span> <hr></li>
+                            rows.push('<li> '+j+'<img class="candi-img" src="/images/Candidate_img.png"><span class="candidate-name">' + data[i].Name + '</span>  <span class="pull-right votes">' + data[i].Votes + '</span> <hr></li>');
+                        }
+                        //<img src="~/images/Candidate_img.png" />
+                        $tbl.append(rows.join(''));
+                    }
+                }
+            });
+        }
+        function getDataMBand() {
+            var $tbl = $('#BandM');
+            $.ajax({
+                url: '/winners?band=M',
+                type: 'POST',
+                datatype: 'json',
+                success: function (data) {
+                    if (data.length > 0) {
+                        $tbl.empty();
+                        //$tbl.append(' <tr><th>Total Votes</th><th>user ID</th><th>band</th></tr>');
+                        $tbl.append(' <li> <p class="pull-right num-of-vot">No. of Votes</p></li>');
+
+                        var rows = [];
+                        for (var i = 0, j = 1; i < (data.length) ; i++, j++) {
+                            //rows.push(' <tr><td>' + data[i].TotalVotes + '</td><td>' + data[i].UserId + '</td><td>' + data[i].Name + '</td></tr>');
+                            //<li> <img class="candi-img" src="~/images/Candidate_img.png"><span class="candidate-name">Candidate 1 </span>  <span class="pull-right votes"> 121</span> <hr></li>
+                            rows.push('<li>' + j + ' <img class="candi-img" src="/images/Candidate_img.png"><span class="candidate-name">' + data[i].Name + '</span>  <span class="pull-right votes">' + data[i].Votes + '</span> <hr></li>');
+                        }
+                        //<img src="~/images/Candidate_img.png" />
+                        $tbl.append(rows.join(''));
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <!-- Page Content -->
+    <div class="container bg">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="main-top-bar">
+                    <img src="~/images/band_m.png">
+                </div>
+                <div class="winners-list">
+                    <ul class="candidate-ul" id="BandM"></ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12 text-center ">
+                <br /><br />
+                <img src="~/images/5e_logo.png">
+                <br /><br /><br />
+                <img src="~/images/vote_tally.png">
+                <br />
+                @*<div class="dis-time">
+                    <p class="time-left">Time Left</p>
+                    <ul class="list-inline time">
+                        <li>
+                            Hrs
+                            <p class="hr">05 </p>
+                        </li>
+                        <li>:</li>
+                        <li>
+                            Mins
+                            <p class="mi">38 </p>
+                        </li>
+                        <li>:</li>
+                        <li>
+                            Secs
+                            <p class="se">45 </p>
+                        </li>
+                    </ul>
+                </div>*@
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="main-top-bar">
+                    <img src="~/images/band_e.png">
+                </div>
+                <div class="winners-list">
+                    <ul class="candidate-ul" id="BandE"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+    <table id="tblJobInfo1" style="text-align:center;margin-left:10px"></table>
+</body>
+</html>
+

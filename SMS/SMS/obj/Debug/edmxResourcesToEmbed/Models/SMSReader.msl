@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SMSEntitiesStoreContainer" CdmEntityContainer="SMSReader">
+    <EntitySetMapping Name="MstSMS">
+      <EntityTypeMapping TypeName="SMSEntities.MstSM">
+        <MappingFragment StoreEntitySet="MstSMS">
+          <ScalarProperty Name="ActionTime" ColumnName="ActionTime" />
+          <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Sender" ColumnName="Sender" />
+          <ScalarProperty Name="Receiver" ColumnName="Receiver" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MstSMSSetups">
+      <EntityTypeMapping TypeName="SMSEntities.MstSMSSetup">
+        <MappingFragment StoreEntitySet="MstSMSSetup">
+          <ScalarProperty Name="SMSEndTime" ColumnName="SMSEndTime" />
+          <ScalarProperty Name="SMSStartTime" ColumnName="SMSStartTime" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmpKeywordMaps">
+      <EntityTypeMapping TypeName="SMSEntities.EmpKeywordMap">
+        <MappingFragment StoreEntitySet="EmpKeywordMap">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Votes" ColumnName="Votes" />
+          <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+          <ScalarProperty Name="Band" ColumnName="Band" />
+          <ScalarProperty Name="EmpCode" ColumnName="EmpCode" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

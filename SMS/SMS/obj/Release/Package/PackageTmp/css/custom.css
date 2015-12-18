@@ -1,0 +1,53 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway);
+.candidate-ul li {
+    clear: both;
+    list-style: outside none none;
+}
+.pull-right.votes {
+    clear: both;
+    color: #00aff0;
+    font-size: 47px;
+    margin-right: 15px;
+}
+hr {
+    border-color: #ccc;
+}
+body {
+    background-color: #dbdbdb;
+    font-family: 'Raleway', sans-serif;
+}
+.winners-list {
+    background-color: #fff;
+    padding: 18px 11px 0px 11px;
+    -webkit-box-shadow: 0px -3px 31px -9px rgba(115, 109, 115, 1);
+    -moz-box-shadow: 0px -3px 31px -9px rgba(115, 109, 115, 1);
+    box-shadow: 0px -3px 31px -9px rgba(115, 109, 115, 1);
+}
+.candidate-ul {
+    padding-left: 0;
+}
+.candi-img {
+    padding-right: 29px;
+}
+.main-top-bar {
+    margin-bottom: -13px;
+    margin-left: -9px;
+}
+.candidate-name {
+    font-size: 16px;
+}
+.dis-time {
+    margin-top: 20px;
+}
+.time {
+    font-size: 17px;
+}
+.hr,
+.mi,
+.se {
+    font-size: 22px;
+}
+.bg {
+    background-image: url(../images/bg.jpg);
+    background-position: -103px -31px;
+}

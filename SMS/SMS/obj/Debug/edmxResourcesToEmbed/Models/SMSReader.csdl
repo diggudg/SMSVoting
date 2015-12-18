@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SMSEntities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="MstSM">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Sender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Receiver" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Message" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Keyword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ActionTime" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityContainer Name="SMSReader" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="MstSMS" EntityType="Self.MstSM" />
+    <EntitySet Name="MstSMSSetups" EntityType="SMSEntities.MstSMSSetup" />
+    <EntitySet Name="EmpKeywordMaps" EntityType="SMSEntities.EmpKeywordMap" />
+  </EntityContainer>
+  <EntityType Name="MstSMSSetup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SMSStartTime" Type="DateTime" Precision="3" />
+    <Property Name="SMSEndTime" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="EmpKeywordMap">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmpCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Band" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Keyword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Votes" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>

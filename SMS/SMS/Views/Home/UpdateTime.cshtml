@@ -1,0 +1,133 @@
+﻿@model SMS.Models.MstSMSSetup
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UpdateTime</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://momentjs.com/downloads/moment-with-locales.js"></script>
+    <script src="http://momentjs.com/downloads/moment-timezone-with-data.js"></script>
+
+</head>
+<body>
+  
+ 
+
+
+
+            Time Zone: Europe/London
+
+            <div class="container" style="margin-top:70px;">
+                <div class="row">
+                    <form class="form-horizontal col-sm-7 col-sm-offset-2" action="" method="post">
+                        <div class="form-group registration-date">
+                            <label class="control-label col-sm-3" for="registration-date">Start Date & Time:</label>
+                            <div class="input-group registration-date-time">
+                                <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+                                <input class="form-control" name="registration_date" id="start-date" type="date">
+                                <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></span>
+                                <input class="form-control" name="registration_time" id="start-time" type="time">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" onclick="addStartNow()"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Now</button>
+                                    <button class="btn btn-default" type="button" onclick="stopStartNow()"><span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span> Stop</button>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        
+             <div class="container" style="margin-top:70px;">
+        <div class="row">
+            <form class="form-horizontal col-sm-7 col-sm-offset-2" action="" method="post">
+                <div class="form-group registration-date">
+                    <label class="control-label col-sm-3" for="registration-date">End Date & Time:</label>
+                    <div class="input-group registration-date-time">
+                        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+                        <input class="form-control" name="registration_date" id="end-date" type="date">
+                        <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-time" aria-hidden="true"></span></span>
+                        <input class="form-control" name="registration_time" id="end-time" type="time">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" onclick="addEndNow()"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span> Now</button>
+                            <button class="btn btn-default" type="button" onclick="stopEndNow()"><span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span> Stop</button>
+                        </span>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+                 <div class="row">
+                     <div class="col-sm-2">
+                         <span class="input-group-btn">
+                            
+                             <button class="btn btn-default" type="button" onclick="SubmitTime()"><span class="glyphicon glyphicon-save" aria-hidden="true"></span>Save</button>
+                         </span>
+                     </div>
+                 </div>
+    </div>
+  
+    
+
+
+    <script>
+        function addStartNow() {
+            nowDate = moment().tz("Europe/London").format('YYYY-MM-DD');
+            nowTime = moment().tz("Europe/London").format('HH:mm:ss');
+            document.getElementById('start-date').value = nowDate;
+            document.getElementById('start-time').value = nowTime;
+            set = setTimeout(function () { addStartNow(); }, 1000);
+        }
+
+        function stopStartNow() {
+            clearTimeout(set);
+        }
+
+        function addEndNow() {
+            nowDate = moment().tz("Asia/Kolkata").format('YYYY-MM-DD');
+            nowTime = moment().tz("Asia/Kolkata").format('HH:mm:ss');
+            document.getElementById('end-date').value = nowDate;
+            document.getElementById('end-time').value = nowTime;
+            set = setTimeout(function () { addEndNow(); }, 1000);
+        }
+
+        function stopEndNow() {
+            clearTimeout(set);
+        }
+        function SubmitTime() {
+            var startDate = document.getElementById('start-date').value;
+            var StartTime = document.getElementById('start-time').value;
+            var StartDatetime = startDate + " " + StartTime;
+            var EndDate = document.getElementById('end-date').value;
+            var EndTime = document.getElementById('end-time').value;
+            var EndDatetime = startDate + " " + StartTime;
+            var abc = StartDatetime + "    " + EndDatetime;
+           // alert(abc);
+            var DataToSubmit = {
+                StartDate: StartDatetime,
+                EndDate: EndDatetime
+            }
+            $.ajax({
+                url: "/StartVoting?StartDate=" + StartDatetime + "&EndDate=" + EndDatetime,
+                type: "POST",
+                data: JSON.stringify( DataToSubmit),
+                datatype: "json",
+                success: function (data) {
+                },
+                error: function () { }
+            });
+        }
+    </script>
+</body>
+</html>
