@@ -47,4 +47,5 @@ Temporary Items
 .apdisk
 bin/
 SMS/packages
-obj/
+SMS/SMS/bin/
+SMS/SMS/obj/
